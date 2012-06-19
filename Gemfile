@@ -6,6 +6,15 @@ gem 'mysql2', '0.3.10'
 # gem 'sqlite3'
 # gem 'pg', '~> 0.13.2'
 
+# Allows easy switching between locally developed gems, and gems installed from rubygems.org
+# See README for more info at: https://github.com/ndbroadbent/bundler_local_development
+gem 'bundler_local_development', :group => :development, :require => false
+begin
+  require 'bundler_local_development'
+  Bundler.development_gems = [/^ffcrm_/]
+rescue LoadError
+end
+
 # Removes a gem dependency
 def remove(name)
   @dependencies.reject! {|d| d.name == name }
@@ -25,24 +34,18 @@ spec.runtime_dependencies.each do |dep|
   gem dep.name, *(dep.requirement.as_list)
 end
 
-# Override the following gems with forked repos on GitHub
-gem 'ransack',      :git => "https://github.com/fatfreecrm/ransack.git"
-gem 'chosen-rails', :git => "https://github.com/fatfreecrm/chosen-rails.git"
-gem 'responds_to_parent', :git => "https://github.com/LessonPlanet/responds_to_parent.git"
-gem 'email_reply_parser', :git => "https://github.com/ndbroadbent/email_reply_parser.git", :branch => 'ensure_newline_above_underscores'
+# Remove premailer auto-require
 gem 'premailer', :require => false
-
 
 # Remove fat_free_crm dependency, to stop it from being auto-required too early.
 remove 'fat_free_crm'
 
 group :development, :test do
   gem 'rspec-rails', '~> 2.9.0'
-  gem 'steak', :require => false
   gem 'headless'
   unless ENV["CI"]
     gem 'ruby-debug', :platform => :mri_18
-    gem 'debugger',   :platform => :mri_19
+    gem (RUBY_VERSION == "1.9.2" ? 'ruby-debug19' : 'debugger'), :platform => :mri_19
   end
   gem 'pry-rails'
 end
@@ -70,6 +73,7 @@ end
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
+  gem 'execjs'
   gem 'therubyracer', :platform => :ruby  # C Ruby (MRI) or Rubinius, but NOT Windows
   gem 'uglifier',     '>= 1.0.3'
 end

@@ -362,6 +362,7 @@ en-GB:
   referred_by_small: referred by
   save_contact: Save Contact
   twitter: Twitter
+  unassigned: Unassigned
   web_presence: Web Presence
   web_presence_small: web presence
   works_at: "%{job_title} at %{company}"
@@ -489,6 +490,13 @@ en-GB:
   subject_lead: lead
   subject_opportunity: opportunity
   subject_task: task
+
+  my_tasks: My Tasks
+  no_task_records: You have no tasks.
+  my_opportunities: My Opportunities
+  no_opportunity_records: You have no opportunities.
+  my_accounts: My Accounts
+  no_account_records: You have no accounts
 
   # Views -> Common.
   #----------------------------------------------------------------------------

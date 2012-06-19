@@ -369,6 +369,7 @@ en-US:
   save_contact: Save Contact
   skype: Skype
   twitter: Twitter
+  unassigned: Unassigned
   web_presence: Web Presence
   web_presence_small: web presence
   works_at: "%{job_title} at %{company}"
@@ -505,6 +506,14 @@ en-US:
   update_past_participle: Updates
   destroy_past_participle: Deletions
   all_events_past_participle: Activities
+
+  my_tasks: My Tasks
+  no_task_records: You have no tasks.
+  my_opportunities: My Opportunities
+  no_opportunity_records: You have no opportunities.
+  my_accounts: My Accounts
+  no_account_records: You have no accounts
+  not_showing_hidden_entities: Not showing %{count} hidden %{entity}.
 
   # Views -> Common.
   #----------------------------------------------------------------------------
@@ -657,9 +666,9 @@ en-US:
   #----------------------------------------------------------------------------
   versions: History
   version:
-    create: %{item} created by %{by} %{when} ago.
-    update: %{item} modified by %{by} %{when} ago.
-    destroy: %{item} destroyed by %{by} %{when} ago.
+    create: %{item} created by %{by}
+    update: %{item} modified by %{by}
+    destroy: %{item} destroyed by %{by}
     set: %{attr} set to %{to}
     unset: %{attr} unset
     change: %{attr} changed from %{from} to %{to}

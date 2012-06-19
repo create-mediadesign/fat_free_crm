@@ -26,6 +26,9 @@ class HomeController < ApplicationController
     hook(:home_controller, self, :params => "it works!")
 
     @activities = get_activities
+    @my_tasks = Task.visible_on_dashboard(@current_user).by_due_at
+    @my_opportunities = Opportunity.visible_on_dashboard(@current_user).by_closes_on
+    @my_accounts = Account.visible_on_dashboard(@current_user).by_name
     respond_with(@activities)
   end
 
@@ -128,20 +131,19 @@ class HomeController < ApplicationController
   #----------------------------------------------------------------------------
   def activity_user
     user = @current_user.pref[:activity_user]
-    if user && user != "all users"
-      user = if user =~ /\s/  # first_name middle_name last_name any_name
-        name_query = if user.include?(" ")
-          user.name_permutations.map{ |first, last|
-            "(upper(first_name) LIKE upper('%#{first}%') AND upper(last_name) LIKE upper('%#{last}%'))"
-          }.join(" OR ")
-        else
-          "upper(first_name) LIKE upper('%#{user}%') OR upper(last_name) LIKE upper('%#{user}%')"
+    if user && user != "all_users"
+      user = if user =~ /@/ # email
+          User.where(:email => user).first
+        else # first_name middle_name last_name any_name
+          name_query = if user.include?(" ")
+            user.name_permutations.map{ |first, last|
+              "(upper(first_name) LIKE upper('%#{first}%') AND upper(last_name) LIKE upper('%#{last}%'))"
+            }.join(" OR ")
+          else
+            "upper(first_name) LIKE upper('%#{user}%') OR upper(last_name) LIKE upper('%#{user}%')"
+          end
+          User.where(name_query).first
         end
-
-        User.where(name_query).first
-      elsif user =~ /@/ # email
-        User.where(:email => user).first
-      end
     end
     user.is_a?(User) ? user.id : nil
   end
@@ -158,4 +160,3 @@ class HomeController < ApplicationController
   end
 
 end
-

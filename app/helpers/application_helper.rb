@@ -38,7 +38,8 @@ module ApplicationHelper
   def show_flash(options = { :sticky => false })
     [:error, :warning, :info, :notice].each do |type|
       if flash[type]
-        html = content_tag(:p, h(flash[type]), :id => "flash")
+        html = content_tag(:div, h(flash[type]), :id => "flash")
+        flash[type] = nil
         return html << content_tag(:script, "crm.flash('#{type}', #{options[:sticky]})", :type => "text/javascript")
       end
     end
@@ -245,7 +246,11 @@ module ApplicationHelper
     [ :blog, :linkedin, :facebook, :twitter, :skype ].map do |site|
       url = person.send(site)
       unless url.blank?
-        url = "http://" << url unless url.match(/^https?:\/\//)
+        if site == :skype then
+          url = "callto:" << url
+        else
+          url = "http://" << url unless url.match(/^https?:\/\//)
+        end
         link_to(image_tag("#{site}.gif", :size => "15x15"), url, :"data-popup" => true, :title => t(:open_in_window, url))
       end
     end.compact.join("\n").html_safe
@@ -422,7 +427,7 @@ module ApplicationHelper
   def link_to_remove_fields(name, f)
     link_to image_tag('delete.png', :size => '16x16', :alt => name), nil, :class => "remove_fields"
   end
-  
+
   # Adds autocomplete functionality to an existing text field.
   #----------------------------------------------------------------------------
   def autocomplete_text_field(id, values)

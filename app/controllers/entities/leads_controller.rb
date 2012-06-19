@@ -24,7 +24,7 @@ class LeadsController < EntitiesController
     @leads = get_leads(:page => params[:page])
     
     respond_with @leads do |format|
-      format.xls { render :layout => 'header' }
+       format.xls { render :layout => 'header' }
     end
   end
 

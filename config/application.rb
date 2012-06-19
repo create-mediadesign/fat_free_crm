@@ -25,12 +25,17 @@ module FatFreeCRM
 
     # Activate observers that should always be running.
     unless ARGV.join.include?('assets:precompile')
-      config.active_record.observers = :lead_observer, :opportunity_observer, :task_observer
+      config.active_record.observers = :lead_observer, :opportunity_observer, :task_observer, :entity_observer
     end
 
     # Load development rake tasks (RSpec, Gem packaging, etc.)
     rake_tasks do
       Dir.glob(Rails.root.join('lib', 'development_tasks', '*.rake')).each {|t| load t }
+    end
+
+    # Add migrations from all engines
+    Railties.engines.each do |engine|
+      config.paths['db/migrate'] += engine.paths['db/migrate'].existent
     end
 
     # Only load the plugins named here, in the order given (default is alphabetical).
