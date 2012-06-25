@@ -86,3 +86,7 @@ end
 
 gem 'capistrano'
 gem 'airbrake'
+
+group :production do
+  gem 'passenger'
+end
