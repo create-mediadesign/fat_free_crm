@@ -24,7 +24,10 @@ class OpportunitiesController < EntitiesController
   #----------------------------------------------------------------------------
   def index
     @opportunities = get_opportunities(:page => params[:page])
-    respond_with(@opportunities)
+    
+    respond_with @opportunities do |format|
+      format.xls { render :layout => 'header' }
+    end
   end
 
   # GET /opportunities/1
@@ -41,7 +44,7 @@ class OpportunitiesController < EntitiesController
   # GET /opportunities/new
   #----------------------------------------------------------------------------
   def new
-    @opportunity.attributes = {:user => @current_user, :stage => "prospecting", :access => Setting.default_access}
+    @opportunity.attributes = {:user => @current_user, :stage => "prospecting", :access => Setting.default_access, :assigned_to => nil}
     @users       = User.except(@current_user)
     @account     = Account.new(:user => @current_user, :access => Setting.default_access)
     @accounts    = Account.my.order('name')

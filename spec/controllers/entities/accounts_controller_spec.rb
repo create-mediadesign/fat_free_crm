@@ -209,11 +209,8 @@ describe AccountsController do
     it "should expose a new account as @account and render [new] template" do
       @account = Account.new(:user => @current_user,
                              :access => Setting.default_access)
-      @users = [ FactoryGirl.create(:user) ]
-
       xhr :get, :new
       assigns[:account].attributes.should == @account.attributes
-      assigns[:users].should == @users
       assigns[:contact].should == nil
       response.should render_template("accounts/new")
     end
@@ -233,11 +230,9 @@ describe AccountsController do
 
     it "should expose the requested account as @account and render [edit] template" do
       @account = FactoryGirl.create(:account, :id => 42, :user => @current_user)
-      @users = [ FactoryGirl.create(:user) ]
 
       xhr :get, :edit, :id => 42
       assigns[:account].should == @account
-      assigns[:users].should == @users
       assigns[:previous].should == nil
       response.should render_template("accounts/edit")
     end
@@ -305,11 +300,9 @@ describe AccountsController do
       it "should expose a newly created account as @account and render [create] template" do
         @account = FactoryGirl.build(:account, :name => "Hello world", :user => @current_user)
         Account.stub!(:new).and_return(@account)
-        @users = [ FactoryGirl.create(:user) ]
 
-        xhr :post, :create, :account => { :name => "Hello world" }, :users => %w(1 2 3)
+        xhr :post, :create, :account => { :name => "Hello world" }
         assigns(:account).should == @account
-        assigns(:users).should == @users
         response.should render_template("accounts/create")
       end
 
@@ -318,16 +311,15 @@ describe AccountsController do
         @account = FactoryGirl.build(:account, :user => @current_user)
         Account.stub!(:new).and_return(@account)
 
-        xhr :post, :create, :account => { :name => "Hello" }, :users => %w(1 2 3)
+        xhr :post, :create, :account => { :name => "Hello" }
         assigns[:accounts].should == [ @account ]
       end
 
       it "should get data to update account sidebar" do
         @account = FactoryGirl.build(:account, :name => "Hello", :user => @current_user)
         Campaign.stub!(:new).and_return(@account)
-        @users = [ FactoryGirl.create(:user) ]
 
-        xhr :post, :create, :account => { :name => "Hello" }, :users => %w(1 2 3)
+        xhr :post, :create, :account => { :name => "Hello" }
         assigns[:account_category_total].should be_instance_of(HashWithIndifferentAccess)
       end
 
@@ -344,11 +336,9 @@ describe AccountsController do
       it "should expose a newly created but unsaved account as @account and still render [create] template" do
         @account = FactoryGirl.build(:account, :name => nil, :user => nil)
         Account.stub!(:new).and_return(@account)
-        @users = [ FactoryGirl.create(:user) ]
 
-        xhr :post, :create, :account => {}, :users => []
+        xhr :post, :create, :account => {}
         assigns(:account).should == @account
-        assigns(:users).should == @users
         response.should render_template("accounts/create")
       end
     end
@@ -373,7 +363,7 @@ describe AccountsController do
         @account = FactoryGirl.create(:account, :id => 42)
         request.env["HTTP_REFERER"] = "http://localhost/accounts"
 
-        xhr :put, :update, :id => 42, :account => { :name => "Hello" }, :users => []
+        xhr :put, :update, :id => 42, :account => { :name => "Hello" }
         assigns(:account).should == @account
         assigns[:account_category_total].should be_instance_of(HashWithIndifferentAccess)
       end
@@ -383,9 +373,9 @@ describe AccountsController do
         he  = FactoryGirl.create(:user, :id => 7)
         she = FactoryGirl.create(:user, :id => 8)
 
-        xhr :put, :update, :id => 42, :account => { :name => "Hello", :access => "Shared" }, :users => %w(7 8)
+        xhr :put, :update, :id => 42, :account => { :name => "Hello", :access => "Shared", :user_ids => %w(7 8) }
         @account.reload.access.should == "Shared"
-        @account.permissions.map(&:user_id).sort.should == [ 7, 8 ]
+        @account.user_ids.sort.should == [ 7, 8 ]
         assigns[:account].should == @account
       end
 

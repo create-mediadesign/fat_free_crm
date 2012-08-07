@@ -43,7 +43,7 @@ class LeadsController < EntitiesController
   # GET /leads/new
   #----------------------------------------------------------------------------
   def new
-    @lead.attributes = {:user => @current_user, :access => Setting.default_access}
+    @lead.attributes = {:user => @current_user, :access => Setting.default_access, :assigned_to => nil}
     @users = User.except(@current_user)
     get_campaigns
 
@@ -96,7 +96,7 @@ class LeadsController < EntitiesController
   #----------------------------------------------------------------------------
   def update
     respond_with(@lead) do |format|
-      if @lead.update_with_permissions(params[:lead], params[:users])
+      if @lead.update_with_lead_counters(params[:lead])
         update_sidebar
       else
         @users = User.except(@current_user)
