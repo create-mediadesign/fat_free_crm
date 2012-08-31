@@ -160,6 +160,11 @@ en-US:
             email:
               missing_email: "^Please specify email address."
               email_in_use: "^There is another user with the same email."
+        custom_field:
+          required: "^%{field} is required."
+          maxlength: "^%{field} is too long."
+          endbeforestart: "^%{field} cannot end before it begins."
+
 
   msg_account_suspended: User account has been suspended.
   password_reset_instruction: password reset instructions
@@ -409,6 +414,7 @@ en-US:
   #----------------------------------------------------------------------------
   amount: Amount
   close_date: Close date
+  closes_on: Closes on
   closed_ago_on: closed %{time_ago} ago on %{date}
   closes_today: expected to close today!
   closing_date: closing date is %{value}
@@ -755,16 +761,6 @@ en-US:
       mmddhhss: "%b %e at %l:%M%p"
       mmddyyyy_hhmm: "%m/%d/%Y %l:%M %p"
 
-  calendar_date_select:
-    ok: OK
-    now: Now
-    today: Today
-    clear: Clear
-
-  # If you need custom format look at
-  # http://code.google.com/p/calendardateselect/wiki/ChangingDateFormatCustom
-  calendar_date_select_format: american
-
   # will_paginate translations copied for 'en-US'
   #----------------------------------------------------------------------------
   will_paginate:
@@ -866,10 +862,19 @@ en-US:
     boolean:     Checkbox
     check_boxes: Checkbox List
     date:        Date
+    datepair:    Date Pair
     datetime:    Date & Time
+    datetimepair: Date & Time Pair
     email:       Email Address
     url:         URL
     tel:         Phone Number
     decimal:     Number (Decimal)
     integer:     Number (Integer)
     float:       Number (Floating Point)
+
+  pair:
+    start:       Start
+    end:         End
+    from_to:     From %{from} to %{to}
+    from_only:   From %{from}
+    to_only:     Until %{to}

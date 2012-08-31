@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120528102124) do
+ActiveRecord::Schema.define(:version => 20120801032706) do
 
   create_table "account_contacts", :force => true do |t|
     t.integer  "account_id"
@@ -32,18 +32,18 @@ ActiveRecord::Schema.define(:version => 20120528102124) do
   create_table "accounts", :force => true do |t|
     t.integer  "user_id"
     t.integer  "assigned_to"
-    t.string   "name",             :limit => 64, :default => "",        :null => false
-    t.string   "access",           :limit => 8,  :default => "Private"
+    t.string   "name",             :limit => 100, :default => "",        :null => false
+    t.string   "access",           :limit => 8,   :default => "Private"
     t.string   "website",          :limit => 64
     t.string   "toll_free_phone",  :limit => 32
     t.string   "phone",            :limit => 32
     t.string   "fax",              :limit => 32
     t.datetime "deleted_at"
-    t.datetime "created_at",                                            :null => false
-    t.datetime "updated_at",                                            :null => false
+    t.datetime "created_at",                                             :null => false
+    t.datetime "updated_at",                                             :null => false
     t.string   "email",            :limit => 64
     t.string   "background_info"
-    t.integer  "rating",                         :default => 0,         :null => false
+    t.integer  "rating",                          :default => 0,         :null => false
     t.string   "category",         :limit => 32
     t.text     "subscribed_users"
   end
@@ -149,7 +149,7 @@ ActiveRecord::Schema.define(:version => 20120528102124) do
     t.string   "first_name",       :limit => 64,  :default => "",        :null => false
     t.string   "last_name",        :limit => 64,  :default => "",        :null => false
     t.string   "access",           :limit => 8,   :default => "Private"
-    t.string   "title",            :limit => 64
+    t.string   "title",            :limit => 200
     t.string   "department",       :limit => 64
     t.string   "source",           :limit => 32
     t.string   "email",            :limit => 64
@@ -222,6 +222,7 @@ ActiveRecord::Schema.define(:version => 20120528102124) do
     t.integer  "maxlength"
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
+    t.integer  "pair_id"
   end
 
   add_index "fields", ["field_group_id"], :name => "index_fields_on_field_group_id"
@@ -249,14 +250,14 @@ ActiveRecord::Schema.define(:version => 20120528102124) do
     t.string   "first_name",       :limit => 64,  :default => "",        :null => false
     t.string   "last_name",        :limit => 64,  :default => "",        :null => false
     t.string   "access",           :limit => 8,   :default => "Private"
-    t.string   "title",            :limit => 64
-    t.string   "company",          :limit => 64
+    t.string   "title",            :limit => 200
+    t.string   "company",          :limit => 128
     t.string   "source",           :limit => 32
     t.string   "status",           :limit => 32
     t.string   "referred_by",      :limit => 64
     t.string   "email",            :limit => 64
     t.string   "alt_email",        :limit => 64
-    t.string   "phone",            :limit => 32
+    t.string   "phone",            :limit => 64
     t.string   "mobile",           :limit => 32
     t.string   "blog",             :limit => 128
     t.string   "linkedin",         :limit => 128

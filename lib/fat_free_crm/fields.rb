@@ -28,6 +28,7 @@ module FatFreeCRM
           extend SingletonMethods
           include InstanceMethods
           serialize_custom_fields!
+          validate :custom_fields_validator
         end
       end
     end
@@ -52,12 +53,19 @@ module FatFreeCRM
           end
         end
       end
+
     end
 
     module InstanceMethods
       def field_groups
         field_groups = self.class.field_groups
         respond_to?(:tag_ids) ? field_groups.with_tags(tag_ids) : field_groups
+      end
+      
+      # run custom field validations on this object
+      #------------------------------------------------------------------------------
+      def custom_fields_validator
+        self.field_groups.map(&:fields).flatten.each{|f| f.custom_validator(self) }
       end
 
       def assign_attributes(new_attributes, options = {})
