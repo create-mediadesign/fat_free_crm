@@ -6,6 +6,7 @@ xml.Worksheet 'ss:Name' => I18n.t(:tab_contacts) do
         heads = [I18n.t('lead'),
                  I18n.t('job_title'),
                  I18n.t('name'),
+                 I18n.t('account')
                  I18n.t('email'),
                  I18n.t('alt_email'),
                  I18n.t('phone'),
@@ -53,6 +54,7 @@ xml.Worksheet 'ss:Name' => I18n.t(:tab_contacts) do
           data    = [contact.lead.try(:name),
                      contact.title,
                      contact.name,
+                     contact.account.try(:name),
                      contact.email,
                      contact.alt_email,
                      contact.phone,
