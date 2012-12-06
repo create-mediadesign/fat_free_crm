@@ -84,4 +84,5 @@ group :assets do
 end
 
 gem 'capistrano'
+gem 'rvm-capistrano'
 gem 'airbrake'
