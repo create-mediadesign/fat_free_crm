@@ -2,7 +2,7 @@ source :rubygems
 
 # Uncomment the database that you have configured in config/database.yml
 # ----------------------------------------------------------------------
-gem 'mysql2', '0.3.10'
+gem 'mysql2'
 # gem 'sqlite3'
 # gem 'pg', '~> 0.13.2'
 
