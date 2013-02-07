@@ -1,5 +1,4 @@
 config/*.yml
-config/deploy.rb
 config/initializers/airbrake.rb
 !config/settings.default.yml
 !config/database.mysql.mac.yml
