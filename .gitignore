@@ -1,5 +1,6 @@
 config/*.yml
 config/initializers/airbrake.rb
+config/initializers/secret_token.rb
 !config/settings.default.yml
 !config/database.mysql.mac.yml
 !config/database.mysql.yml
