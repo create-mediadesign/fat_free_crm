@@ -85,4 +85,4 @@ end
 
 gem 'capistrano'
 gem 'rvm-capistrano'
-gem 'airbrake', '3.0.9'
+gem 'airbrake'

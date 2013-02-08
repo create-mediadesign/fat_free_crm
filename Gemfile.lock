@@ -36,9 +36,10 @@ GEM
       sqlite3
     acts_as_list (0.1.8)
     addressable (2.3.2)
-    airbrake (3.0.9)
+    airbrake (3.1.8)
       activesupport
       builder
+      json
     ajax-chosen-rails (0.2.1)
       chosen-rails_ffcrm
       railties (~> 3.0)
@@ -272,7 +273,7 @@ DEPENDENCIES
   acts_as_commentable (~> 3.0.1)
   acts_as_fu (~> 0.0.8)
   acts_as_list (~> 0.1.4)
-  airbrake (= 3.0.9)
+  airbrake
   ajax-chosen-rails (>= 0.2.1)
   authlogic (= 3.1.0)
   bundler_local_development
