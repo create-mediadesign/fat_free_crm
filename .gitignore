@@ -33,3 +33,4 @@ Design
 *.swp
 *.gem
 .ruby-version
+vendor/ruby
