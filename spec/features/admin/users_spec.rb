@@ -1,3 +1,8 @@
+# Copyright (c) 2008-2013 Michael Dvorkin and contributors.
+#
+# Fat Free CRM is freely distributable under the terms of MIT license.
+# See MIT-LICENSE file or http://www.opensource.org/licenses/mit-license.php
+#------------------------------------------------------------------------------
 require File.expand_path("../../acceptance_helper.rb", __FILE__)
 
 feature 'Users tab', %q{
@@ -24,10 +29,10 @@ feature 'Users tab', %q{
     chosen_select('Superheroes', :from => 'user_group_ids')
 
     click_button 'Create User'
-    page.should have_content('Captain Thunder')
-    page.should have_content('Weather Inc.')
-    page.should have_content('Superheroes')
-    page.should have_content('lightning@example.com')
+    find('#users').should have_content('Captain Thunder')
+    find('#users').should have_content('Weather Inc.')
+    find('#users').should have_content('Superheroes')
+    find('#users').should have_content('lightning@example.com')
 
   end
 

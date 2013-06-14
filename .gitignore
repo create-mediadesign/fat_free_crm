@@ -1,4 +1,5 @@
 config/*.yml
+config/deploy.rb
 config/initializers/airbrake.rb
 config/initializers/secret_token.rb
 !config/settings.default.yml
@@ -28,9 +29,10 @@ Design
 .idea/
 .DS_Store
 .rvmrc
+.ruby-version
+.ruby-gemset
 .sass-cache
 *~
 *.swp
 *.gem
-.ruby-version
 vendor/ruby
