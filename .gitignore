@@ -32,4 +32,4 @@ Design
 *~
 *.swp
 *.gem
-
+.ruby-version
