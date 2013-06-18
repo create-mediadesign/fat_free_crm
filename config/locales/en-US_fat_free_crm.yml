@@ -863,8 +863,8 @@ en-US:
   # Simple Form translations
   #----------------------------------------------------------------------------
   simple_form:
-    "yes": 'Yes'
-    "no": 'No'
+    yes: 'Yes'
+    no: 'No'
     required:
       text: 'required'
       mark: '*'
