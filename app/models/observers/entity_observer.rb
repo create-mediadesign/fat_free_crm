@@ -7,12 +7,12 @@ class EntityObserver < ActiveRecord::Observer
   observe :account, :contact, :lead, :opportunity
 
   def after_create(item)
-    send_notification_to_assignee(item) if current_user != item.assignee
+    # send_notification_to_assignee(item) if current_user != item.assignee
   end
 
   def after_update(item)
     if item.assigned_to_changed? && item.assignee != current_user
-      send_notification_to_assignee(item)
+      # send_notification_to_assignee(item)
     end
   end
 
