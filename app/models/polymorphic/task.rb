@@ -100,6 +100,13 @@ class Task < ActiveRecord::Base
   acts_as_commentable
   has_paper_trail :meta => { :related => :asset }, :ignore => [ :subscribed_users ]
   has_fields
+  searchable :constraints => %w{assigned_to user_id} do
+    mapping do
+      indexes :name,              :boost => 80
+      indexes :assignee,          :as => 'assignee.try(:id)', :analyzer => 'keyword'
+      indexes :completor,         :as => 'completor.try(:id)', :analyzer => 'keyword'
+    end
+  end
   exportable
 
   validates_presence_of :user

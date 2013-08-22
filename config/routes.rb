@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   match 'logout'     => 'authentications#destroy', :as => :logout
   match 'profile'    => 'users#show',              :as => :profile
   match 'signup'     => 'users#new',               :as => :signup
+  match 'search'     => 'search#new',              :as => :fulltext_search
+  match 'auto_complete'=> 'search#auto_complete',  :as => :auto_complete
 
   match '/home/options',  :as => :options
   match '/home/toggle',   :as => :toggle

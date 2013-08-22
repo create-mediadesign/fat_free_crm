@@ -54,6 +54,12 @@ class Campaign < ActiveRecord::Base
   has_paper_trail :ignore => [ :subscribed_users ]
   has_fields
   exportable
+  searchable :constraints => %w{assigned_to user_id} do
+    mapping do
+      indexes :name,              :boost => 90
+      indexes :assignee,          :as => 'assignee.try(:id)', :analyzer => 'keyword'
+    end
+  end
   sortable :by => [ "name ASC", "target_leads DESC", "target_revenue DESC", "leads_count DESC", "revenue DESC", "starts_on DESC", "ends_on DESC", "created_at DESC", "updated_at DESC" ], :default => "created_at DESC"
 
   has_ransackable_associations %w(leads opportunities tags activities emails comments tasks)

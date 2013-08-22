@@ -175,15 +175,6 @@ module ApplicationHelper
   end
 
   #----------------------------------------------------------------------------
-  def jumpbox(current)
-    tabs = [ :campaigns, :accounts, :leads, :contacts, :opportunities ]
-    current = tabs.first unless tabs.include?(current)
-    tabs.map do |tab|
-      link_to_function(t("tab_#{tab}"), "crm.jumper('#{tab}')", :class => (tab == current ? 'selected' : ''))
-    end.join(" | ").html_safe
-  end
-
-  #----------------------------------------------------------------------------
   def styles_for(*models)
     render :partial => "shared/inline_styles", :locals => { :models => models }
   end

@@ -1,0 +1,9 @@
+= content_for(:javascript_epilogue) do
+  :plain
+    document.observe("dom:loaded", function() {
+      crm.auto_complete(null, null, true, "quick_search_query", "quick_search_dropdown");
+    });
+
+%span#quicksearch
+  = text_field_tag "quick_search_query", nil, :style => "width: 270px", :autocomplete => :off, :data => {:entities => "accounts,campaigns,contacts,leads,opportunities", :placeholder => "Quicksearch"}, :name => "query"
+  .auto_complete#quick_search_dropdown

@@ -75,6 +75,12 @@ class Opportunity < ActiveRecord::Base
   has_paper_trail :ignore => [ :subscribed_users ]
   has_fields
   exportable
+  searchable :constraints => %w{assigned_to user_id} do
+    mapping do
+      indexes :name,              :boost => 90
+      indexes :assignee,          :as => 'assignee.try(:id)', :analyzer => 'keyword'
+    end
+  end
   sortable :by => [ "name ASC", "amount DESC", "amount*probability DESC", "probability DESC", "closes_on ASC", "created_at DESC", "updated_at DESC" ], :default => "created_at DESC"
 
   has_ransackable_associations %w(account contacts tags campaign activities emails comments)

@@ -6,12 +6,12 @@
       %span#welcome_username= current_user.name
       %span> !&nbsp;&nbsp;
 
-      = link_to(t(:quick_find), "#", :id => "jumper") << " |"
+      = render "/layouts/quicksearch"
+      = render "/layouts/auto_complete_box"
       = link_to(t(:profile), profile_path) << " |"
       - if current_user.admin?
         = link_to(t(:admin), admin_path) << " |"
       = link_to(t(:logout), logout_path, :method => :delete)
-      = render "/layouts/jumpbox"
     - else
       = link_to(t(:login), login_path) << " |"
       = link_to(t(:sign_up), signup_path) << " |" if can_signup?
