@@ -46,7 +46,7 @@ class Search::Entity
 
   private
   def entity_names
-    @entities
+    @entities.map { |ent| ent.to_s.singularize.camelcase.constantize.tire.index_name }
   end
 
 end

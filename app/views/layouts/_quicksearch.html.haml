@@ -5,5 +5,5 @@
     });
 
 %span#quicksearch
-  = text_field_tag "quick_search_query", nil, :style => "width: 270px", :autocomplete => :off, :data => {:entities => "accounts,campaigns,contacts,leads,opportunities", :placeholder => "Quicksearch"}, :name => "query"
+  = text_field_tag "quick_search_query", nil, :style => "width: 270px", :autocomplete => :off, :data => {:entities => "accounts,campaigns,contacts,leads,opportunities"}, :placeholder => "Quicksearch", :name => "query"
   .auto_complete#quick_search_dropdown

@@ -421,13 +421,13 @@ var crm = {
             new Ajax.Request(this.base_url + "/" + related + "/attach", {
               method     : "put",
               parameters : { assets : controller, asset_id : escape(el.id) },
-              onComplete : function() { $("jumpbox").hide(); }
+              onComplete : function() { $("autocompletebox").hide(); }
             });
           } else {        // Quick Find: redirect to asset#show.
             window.location.href = this.base_url + "/" + (el.getAttribute('data-controller') || controller) + "/" + escape(el.id);
           }
         } else {          // Autocomplete entry not found: refresh current page.
-          $("auto_complete_query").value = "";
+          $(domId).value = "";
           window.location.href = window.location.href;
         }
       }.bind(this)        // Binding for this.base_url.

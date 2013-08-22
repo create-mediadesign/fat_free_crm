@@ -6,7 +6,7 @@
       - name << " (#{item.company})" if item.is_a?(Lead)
       - name = highlight(truncate(name, :length => 45), @query)
       - name = content_tag(:strike, name) if item.is_a?(Task) && item.completed?
-      %li{:id => item.id, :data => {:controller => hit['_index']}}
+      %li{:id => item.id, :data => {:controller => item.class.to_s.downcase.pluralize}}
         - if multi_view
           %div.strip= hit['_type']
         %div{:class => (multi_view ? "indent" : "")}= name
