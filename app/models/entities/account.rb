@@ -65,6 +65,12 @@ class Account < ActiveRecord::Base
   has_paper_trail :ignore => [ :subscribed_users ]
   has_fields
   exportable
+  searchable :constraints => %w{assigned_to user_id} do
+    mapping do
+      indexes :name,              :boost => 90
+      indexes :assignee,          :as => 'assignee.try(:id)', :analyzer => 'keyword'
+    end
+  end
   sortable :by => [ "name ASC", "rating DESC", "created_at DESC", "updated_at DESC" ], :default => "created_at DESC"
 
   has_ransackable_associations %w(contacts opportunities tags activities emails addresses comments tasks)

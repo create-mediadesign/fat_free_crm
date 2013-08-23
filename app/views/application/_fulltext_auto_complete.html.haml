@@ -1,0 +1,14 @@
+%ul
+  - unless @auto_complete.total == 0
+    - multi_view = (@entities_count > 1)
+    - @auto_complete.each_with_hit do |item, hit|
+      - name = item.name
+      - name << " (#{item.company})" if item.is_a?(Lead)
+      - name = highlight(truncate(name, :length => 45), @query)
+      - name = content_tag(:strike, name) if item.is_a?(Task) && item.completed?
+      %li{:id => item.id, :data => {:controller => item.class.to_s.downcase.pluralize}}
+        - if multi_view
+          %div.strip= hit['_type']
+        %div{:class => (multi_view ? "indent" : "")}= name
+  - else
+    %li== #{t(:no_match, t(controller.controller_name + '_small'))} <font color="yellow">#{@query}</font>

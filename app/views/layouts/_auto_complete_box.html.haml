@@ -1,0 +1,5 @@
+#autocompletebox{ hidden }
+  %span#autocompletebox_label{ hidden }
+  %br
+  = text_field_tag "auto_complete_query", nil, :style => "width: 310px", :autocomplete => :off, :name => "query"
+  .auto_complete#auto_complete_dropdown

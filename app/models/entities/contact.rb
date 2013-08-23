@@ -88,6 +88,12 @@ class Contact < ActiveRecord::Base
   has_paper_trail :ignore => [ :subscribed_users ]
 
   has_fields
+  searchable :constraints => %w{assigned_to user_id} do
+    mapping do
+      indexes :name,              :as => 'full_name', :boost => 100
+      indexes :assignee,          :as => 'assignee.try(:id)', :analyzer => 'keyword'
+    end
+  end
   exportable
   sortable :by => [ "first_name ASC",  "last_name ASC", "created_at DESC", "updated_at DESC" ], :default => "created_at DESC"
 

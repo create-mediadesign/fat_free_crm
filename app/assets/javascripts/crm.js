@@ -8,7 +8,7 @@ var crm = {
   EXPANDED      : "&#9660;",
   COLLAPSED     : "&#9658;",
   searchRequest : null,
-  autocompleter : null,
+  autocompleter : {},
   base_url      : "",
 
   //----------------------------------------------------------------------------
@@ -385,27 +385,22 @@ var crm = {
   },
 
   //----------------------------------------------------------------------------
-  jumper: function(controller) {
-    var name = controller.capitalize();
-    $$("#jumpbox_menu a").each(function(link) {
-      if (link.innerHTML == name) {
-        link.addClassName("selected");
-      } else {
-        link.removeClassName("selected");
-      }
-    });
-    this.auto_complete(controller, null, true);
-  },
-
-  //----------------------------------------------------------------------------
-  auto_complete: function(controller, related, focus) {
-    if (this.autocompleter) {
-      Event.stopObserving(this.autocompleter.element);
-      delete this.autocompleter;
+  auto_complete: function(controller, related, focus, domId, dropdownDomId) {
+    domId = domId || "auto_complete_query";
+    dropdownDomId = dropdownDomId || "auto_complete_dropdown";
+    if (this.autocompleter[domId]) {
+      Event.stopObserving(this.autocompleter[domId].element);
+      delete this.autocompleter[domId];
     }
-    this.autocompleter = new Ajax.Autocompleter("auto_complete_query", "auto_complete_dropdown", this.base_url + "/" + controller + "/auto_complete", {
+    var params = {
+      entities: controller || document.getElementById(domId).getAttribute('data-entities')
+    };
+    if (related) {
+      params['related'] = related;
+    }
+    this.autocompleter[domId] = new Ajax.Autocompleter(domId, dropdownDomId, this.base_url + "/auto_complete", {
       frequency: 0.25,
-      parameters: (related) ? ('related=' + related) : null,
+      parameters: jQuery.param(params),
       onShow: function(element, update) {
         // overridding onShow to include a fix for IE browsers
         // see https://prototype.lighthouseapp.com/projects/8887/tickets/263-displayinline-fixes-positioning-of-autocomplete-results-div-in-ie8
@@ -426,21 +421,21 @@ var crm = {
             new Ajax.Request(this.base_url + "/" + related + "/attach", {
               method     : "put",
               parameters : { assets : controller, asset_id : escape(el.id) },
-              onComplete : function() { $("jumpbox").hide(); }
+              onComplete : function() { $("autocompletebox").hide(); }
             });
           } else {        // Quick Find: redirect to asset#show.
-            window.location.href = this.base_url + "/" + controller + "/" + escape(el.id);
+            window.location.href = this.base_url + "/" + (el.getAttribute('data-controller') || controller) + "/" + escape(el.id);
           }
         } else {          // Autocomplete entry not found: refresh current page.
-          $("auto_complete_query").value = "";
+          $(domId).value = "";
           window.location.href = window.location.href;
         }
       }.bind(this)        // Binding for this.base_url.
     });
-    $("auto_complete_dropdown").update("");
-    $("auto_complete_query").value = "";
+    $(dropdownDomId).update("");
+    $(domId).value = "";
     if (focus) {
-      $("auto_complete_query").focus();
+      $(domId).focus();
     }
   }
 }

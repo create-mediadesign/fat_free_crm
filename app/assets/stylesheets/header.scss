@@ -46,7 +46,7 @@ $color_footer: grey;
       -webkit-border: {
         top-left-radius: 2px;
         top-right-radius: 2px; }; } }
-  #jumpbox {
+  #autocompletebox {
     background: steelblue;
     margin: 2px 0px 0px 0px;
     padding: 12px;
@@ -57,18 +57,24 @@ $color_footer: grey;
     -webkit-border: {
       bottom-left-radius: 6px;
       bottom-right-radius: 6px; };
-    #jumpbox_menu {
-      a {
-        color: white;
-        padding: 0px 0px 4px 0px;
-        &.selected {
-          color: navy; }
-        &:hover {
-          background: steelblue; } } }
-    #jumpbox_label {
+    #autocompletebox_label {
       color: white; }
     input {
-      margin: 2px 0px 0px 0px; } } }
+      margin: 2px 0px 0px 0px; } }
+  #quicksearch {
+    margin: 2px 0px 0px 0px;
+    -moz-border-radius: {
+      bottomleft: 6px;
+      bottomright: 6px; };
+    -webkit-border: {
+      bottom-left-radius: 6px;
+      bottom-right-radius: 6px; };
+    input {
+      margin: 2px 0px 0px 0px;
+      -moz-border-radius: 5px;
+      -webkit-border-radius: 5px;
+      border: none;
+      padding: 4px; } } }
 
 .tabs {
   background: $color_header_background;

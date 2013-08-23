@@ -1,0 +1,2 @@
+# http://stackoverflow.com/questions/9676089/how-to-test-elasticsearch-in-a-rails-application-rspec
+Tire::Model::Search.index_prefix "#{Rails.application.class.parent_name.downcase}_#{Rails.env.to_s.downcase}"
