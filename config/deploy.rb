@@ -19,6 +19,6 @@ set :deploy_to,       '/home/create/www/fat_free_crm'
 server                'live.create.at', :app, :web, :db, primary: true
 set :repository,      'git@github.com:create-mediadesign/fat_free_crm.git'
 set :scm,             :git
-set :branch,          'master'
+set :branch,          'fulltext_search'
 
 ssh_options[:forward_agent] = true
