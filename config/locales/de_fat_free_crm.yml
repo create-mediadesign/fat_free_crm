@@ -839,3 +839,7 @@ de:
     from_only: Von %{from}
     to_only: Bis %{to}
   contact_summary: Kontakt-Zusammenfassung
+
+  # Create
+  #----------------------------------------------------------------------------
+  press: Presse
