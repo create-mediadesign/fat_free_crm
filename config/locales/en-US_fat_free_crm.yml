@@ -131,6 +131,8 @@ en-US:
               missing_first_name: ^Please specify first name.
             last_name:
               missing_last_name: ^Please specify last name.
+            campaign_id:
+              missing_campaign_id: ^Please specify a campaign.
             access:
               share_lead: ^Please specify users to share the lead with.
         opportunity:
