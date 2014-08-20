@@ -29,7 +29,7 @@
             = f.select :source, Setting.unroll(:lead_source), { :selected => (@lead.source || "other").to_sym }, { :style => "width:160px" }
         %td= spacer
         %td{ :colspan => 3 }
-          .label #{t :campaign}:
+          .label{ :class => 'req' } #{t :campaign}:
           - if @campaign && !edit # Create a lead from Campaign landing page: select current campaign and disable the dropdown.
             = collection_select :lead, :campaign_id, @campaigns, :id, :name, { :selected => @campaign.id }, { :style => "width:100%", :disabled => true }
           - else

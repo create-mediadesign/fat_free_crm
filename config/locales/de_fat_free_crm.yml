@@ -266,6 +266,8 @@ de:
               missing_first_name: ^Bitte geben Sie den Vornamen an.
             last_name:
               missing_last_name: ^Bitte geben Sie den Nachnamen an.
+            campaign_id:
+              missing_campaign_id: ^Bitte geben Sie eine Kampagne an.
         authentication:
           attributes:
             password_field:
